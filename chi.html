@@ -17,7 +17,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+	MIN-HEIGHT: 100VH;
             padding: 20px;
         }
 
@@ -39,6 +39,7 @@
         .subtitle {
             color: #666;
             margin-bottom: 30px;
+            margin-top: 8px;
         }
 
         .result {
@@ -53,15 +54,15 @@
         }
 
         .btn {
-            padding: 15px 35px;
-            font-size: 18px;
+            padding: 12px 25px;
+            font-size: 16px;
             background-color: #ff6b6b;
             color: white;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             transition: 0.3s;
-            margin: 10px;
+            margin: 8px;
         }
 
         .btn:hover {
@@ -92,6 +93,8 @@
         
         <button class="btn" onclick="randomEat()">帮我选！</button>
         <button class="btn" onclick="clearResult()">重置</button>
+        <!-- 新增：查看全部菜品按钮 -->
+        <button class="btn" onclick="showAllFoods()">查看全部菜品</button>
 
         <div class="add-box">
             <input type="text" id="foodInput" placeholder="输入想吃的菜品">
@@ -119,16 +122,26 @@
             document.getElementById("result").innerText = "点击按钮开始随机";
         }
 
-        // 添加菜品 修复可用版
+        // 添加菜品 + 去重
         function addFood() {
             let val = document.getElementById("foodInput").value.trim();
-            if(val === ""){
+            if (val === "") {
                 alert("请输入菜品名称");
+                return;
+            }
+            if (foods.includes(val)) {
+                alert("该菜品已经存在，无需重复添加！");
+                document.getElementById("foodInput").value = "";
                 return;
             }
             foods.push(val);
             document.getElementById("foodInput").value = "";
             alert("添加成功！可以继续随机啦");
+        }
+
+        // 新增：查看所有已存在菜品
+        function showAllFoods() {
+            alert("当前所有菜品：\n\n" + foods.join(" 、 "));
         }
     </script>
 </body>
